@@ -13,11 +13,17 @@ var config = {
     module: {
         loaders: [
             {
-                test: /\.jsx?/,
+                test: [/\.js?/, /\.jsx?/],
                 include: APP_DIR,
                 loader: 'babel'
+            }, {
+                test: /\.json?/,
+                loader: 'json'
             }
         ]
+    },
+    resolve: {
+        extensions: ['', '.json', '.jsx', '.js']
     }
 };
 

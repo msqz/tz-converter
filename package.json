@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch",
     "dev": "webpack -d --watch",
     "build": "webpack -p"
   },
@@ -18,16 +19,25 @@
   },
   "dependencies": {
     "material-ui": "^0.15.3",
+    "moment": "^2.14.1",
+    "moment-timezone": "^0.5.5",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^1.0.0",
-    "redux": "^3.5.2"
+    "react-throttle": "^0.3.0",
+    "redux": "^3.5.2",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
+    "babel-register": "^6.11.6",
+    "expect": "^1.20.2",
+    "json-loader": "^0.5.4",
+    "mocha": "^3.0.2",
     "webpack": "^1.13.1"
   }
 }

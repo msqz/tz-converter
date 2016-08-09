@@ -1,18 +1,13 @@
-var React = require('react');
+import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import AutoComplete from 'material-ui/AutoComplete';
+var moment = require('moment-timezone');
 
 module.exports = React.createClass({
     getInitialState: function () {
         return {
-            dataSource: [{
-                id: 1, name: 'Warsaw', offset: -120
-            }, {
-                id: 2, name: 'Moscow', offset: -240
-            }, {
-                id: 3, name: 'London', offset: 0
-            }],
+            dataSource: moment.tz.names(),
             selectedZone: undefined,
             dialogOpened: false
         };
@@ -37,26 +32,25 @@ module.exports = React.createClass({
         this.setState({dialogOpened: false});
     },
     handleZoneChosen: function (choice) {
-        this.setState({selectedZone: choice});
+        var zone = moment.tz.zone(choice);
+        this.setState({
+            selectedZone: {
+                name: zone.name.split('/')[1].replace('_', ' '),
+                offset: zone.offset(Date.now())
+            }
+        });
     },
     render: function () {
         var dialogActions = [
             <FlatButton
                 label="Cancel"
                 secondary={true}
-                onTouchTap={this.handleDialogClosing}
-            />,
+                onTouchTap={this.handleDialogClosing}/>,
             <FlatButton
                 label="OK"
                 primary={true}
-                onTouchTap={this.handleSubmit}
-            />
+                onTouchTap={this.handleSubmit}/>
         ];
-
-        var dataSourceConfig = {
-            text: 'name',
-            value: 'id'
-        };
 
         var dialogStyle = {
             width: '450px',
@@ -65,7 +59,9 @@ module.exports = React.createClass({
 
         return (
             <div>
-                <FlatButton label="Add timezone" primary={true} onTouchTap={this.handleDialogOpening}/>
+                <FlatButton label="Add timezone"
+                            primary={true}
+                            onTouchTap={this.handleDialogOpening}/>
                 <Dialog
                     title="Choose timezone"
                     open={this.state.dialogOpened}
@@ -74,10 +70,9 @@ module.exports = React.createClass({
                     contentStyle={dialogStyle}>
 
                     <AutoComplete
-                        hintText="Your zone"
+                        hintText="Type your timezone..."
                         dataSource={this.state.dataSource}
                         onNewRequest={this.handleZoneChosen}
-                        dataSourceConfig={dataSourceConfig}
                         filter={AutoComplete.caseInsensitiveFilter}
                         fullWidth={true}
                     />

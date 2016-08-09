@@ -5,6 +5,7 @@
 }
 
 body {
+    background-color: #ECEFF1;
     width: 500px;
     margin: 20px auto;
 }
@@ -15,4 +16,27 @@ body {
 
 .white-text * {
     color: white !important;
+}
+
+.user-timezone {
+    background-color: #673AB7 !important;
+    color: white !important;
+    width: 190px !important;
+    margin: 20px !important;
+    padding: 15px 15px 5px 15px !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.user-timezone-input {
+    width: 100px !important;
+    color: white !important;
+}
+
+.timezone-box {
+    height: 120px;
+    width: 190px;
+    margin: 20px;
+    text-align: center;
+    display: inline-block;
 }
