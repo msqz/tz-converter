@@ -16,15 +16,15 @@ module.exports = React.createClass({
     },
     handleOnBlur: function (e) {
         var self = this;
-        newTime = buildDateWithTimezone();
+        var newTime = buildDateWithTimezone();
         this.setState({isChanging: false});
         this.props.onTimeChangingFinished(newTime);
 
         function buildDateWithTimezone(){
             var year = self.props.time.getFullYear();
-            var month = this.pad(self.props.time.getMonth());
-            var day = this.pad(self.props.time.getDate());
-            var newTime = new Date(`${year}-${month}-${day}T${this.state.customTime}${this.tokenizeOffset()}`);
+            var month = self.pad(self.props.time.getMonth());
+            var day = self.pad(self.props.time.getDate());
+            return new Date(`${year}-${month}-${day}T${self.state.customTime}${self.tokenizeOffset()}`);
         }
     },
     handleOnChange: function (e) {
