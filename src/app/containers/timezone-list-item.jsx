@@ -2,7 +2,6 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 var timeNormalizer = require('../time-normalizer');
-import moment from 'moment';
 
 module.exports = React.createClass({
     getInitialState: function () {
@@ -16,12 +15,17 @@ module.exports = React.createClass({
         this.props.onTimeChangingStarted();
     },
     handleOnBlur: function (e) {
+        var self = this;
+        newTime = buildDateWithTimezone();
         this.setState({isChanging: false});
-        var year = this.props.time.getFullYear();
-        var month = this.pad(this.props.time.getMonth());
-        var day = this.pad(this.props.time.getDate());
-        var newTime = new Date(`${year}-${month}-${day}T${this.state.customTime}${this.tokenizeOffset()}`);
         this.props.onTimeChangingFinished(newTime);
+
+        function buildDateWithTimezone(){
+            var year = self.props.time.getFullYear();
+            var month = this.pad(self.props.time.getMonth());
+            var day = this.pad(self.props.time.getDate());
+            var newTime = new Date(`${year}-${month}-${day}T${this.state.customTime}${this.tokenizeOffset()}`);
+        }
     },
     handleOnChange: function (e) {
         this.setState({customTime: e.target.value});
