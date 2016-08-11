@@ -38738,6 +38738,7 @@
 	                this.tokenizeOffset(),
 	                ')'
 	            ),
+	            _react2.default.createElement('br', null),
 	            _react2.default.createElement(_TextField2.default, { name: this.props.name,
 	                className: 'user-timezone-input white-text',
 	                type: 'time',
@@ -41391,7 +41392,8 @@
 	                    hintText: 'Type your timezone...',
 	                    dataSource: this.state.dataSource,
 	                    onNewRequest: this.handleZoneChosen,
-	                    filter: _AutoComplete2.default.caseInsensitiveFilter,
+	                    filter: _AutoComplete2.default.fuzzyFilter,
+	                    maxSearchResults: 10,
 	                    fullWidth: true
 	                })
 	            )

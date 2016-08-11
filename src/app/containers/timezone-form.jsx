@@ -73,7 +73,8 @@ module.exports = React.createClass({
                         hintText="Type your timezone..."
                         dataSource={this.state.dataSource}
                         onNewRequest={this.handleZoneChosen}
-                        filter={AutoComplete.caseInsensitiveFilter}
+                        filter={AutoComplete.fuzzyFilter}
+                        maxSearchResults={10}
                         fullWidth={true}
                     />
                 </Dialog>

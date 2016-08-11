@@ -39,6 +39,7 @@ module.exports = React.createClass({
         return (
             <Paper className="user-timezone">
                 <span>{this.props.name } (GMT { this.tokenizeOffset() })</span>
+                <br/>
                 <TextField name={this.props.name}
                            className="user-timezone-input white-text"
                            type="time"

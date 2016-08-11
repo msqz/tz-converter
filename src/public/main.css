@@ -21,15 +21,15 @@ body {
 .user-timezone {
     background-color: #673AB7 !important;
     color: white !important;
-    width: 190px !important;
-    margin: 20px !important;
-    padding: 15px 15px 5px 15px !important;
+    width: auto !important;
+    margin: 10px !important;
+    padding: 10px 15px 5px 15px !important;
     display: inline-block !important;
-    text-align: center !important;
+    text-align: left !important;
 }
 
 .user-timezone-input {
-    width: 100px !important;
+    width: auto !important;
     color: white !important;
 }
 
