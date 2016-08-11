@@ -76,19 +76,23 @@
 	    _react2.default.createElement(_timezoneConverter2.default, null)
 	), document.getElementById('app'));
 	
-	var interval = null;
-	store.subscribe(function () {
-	    if (store.getState().clock.isTicking && interval === null) {
-	        interval = setInterval(function () {
-	            return store.dispatch((0, _actions.tick)());
-	        }, 1000);
-	    }
-	    if (!store.getState().clock.isTicking && interval !== null) {
-	        clearInterval(interval);
-	        interval = null;
-	    }
-	});
-	store.dispatch((0, _actions.runClock)());
+	var timerInterval = null;
+	watchOnClockState();
+	
+	function watchOnClockState() {
+	    store.subscribe(function () {
+	        if (store.getState().clock.isTicking && timerInterval === null) {
+	            timerInterval = setInterval(function () {
+	                return store.dispatch((0, _actions.tick)());
+	            }, 1000);
+	        }
+	        if (!store.getState().clock.isTicking && timerInterval !== null) {
+	            clearInterval(timerInterval);
+	            timerInterval = null;
+	        }
+	    });
+	    store.dispatch((0, _actions.runClock)());
+	}
 
 /***/ },
 /* 1 */
@@ -23890,6 +23894,7 @@
 	
 	    switch (action.type) {
 	        case _actions.SET_TIME:
+	            if (isNaN(action.time.getTime())) return state;
 	            return _underscore2.default.assign({}, state, { now: action.time });
 	        case _actions.TICK:
 	            var now = new Date(state.now);
@@ -38702,7 +38707,10 @@
 	        };
 	    },
 	    handleOnFocus: function handleOnFocus(e) {
-	        this.setState({ isChanging: true });
+	        this.setState({
+	            isChanging: true,
+	            customTime: timeNormalizer.toOffsetedTimestring(this.props.time, this.props.offset)
+	        });
 	        this.props.onTimeChangingStarted();
 	    },
 	    handleOnBlur: function handleOnBlur(e) {
@@ -38723,9 +38731,7 @@
 	    },
 	    render: function render() {
 	        var time = timeNormalizer.toOffsetedTimestring(this.props.time, this.props.offset);
-	        if (this.state.isChanging) {
-	            time = this.state.customTime;
-	        }
+	        if (this.state.isChanging) time = this.state.customTime;
 	
 	        return _react2.default.createElement(
 	            _Paper2.default,

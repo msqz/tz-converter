@@ -14,14 +14,18 @@ render(
     document.getElementById('app')
 );
 
-let interval = null;
-store.subscribe(() => {
-    if (store.getState().clock.isTicking && interval === null) {
-        interval = setInterval(() => store.dispatch(tick()), 1000);
-    }
-    if (!store.getState().clock.isTicking && interval !== null) {
-        clearInterval(interval);
-        interval = null;
-    }
-});
-store.dispatch(runClock());
+let timerInterval = null;
+watchOnClockState();
+
+function watchOnClockState() {
+    store.subscribe(() => {
+        if (store.getState().clock.isTicking && timerInterval === null) {
+            timerInterval = setInterval(() => store.dispatch(tick()), 1000);
+        }
+        if (!store.getState().clock.isTicking && timerInterval !== null) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    });
+    store.dispatch(runClock());
+}

@@ -30,6 +30,8 @@ function timezones(state = [], action) {
 function clock(state = {}, action) {
     switch (action.type) {
         case SET_TIME:
+            if (isNaN(action.time.getTime()))
+                return state;
             return _.assign({}, state, {now: action.time});
         case TICK:
             let now = new Date(state.now);

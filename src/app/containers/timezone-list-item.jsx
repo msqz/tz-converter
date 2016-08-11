@@ -11,7 +11,10 @@ module.exports = React.createClass({
         }
     },
     handleOnFocus: function (e) {
-        this.setState({isChanging: true});
+        this.setState({
+            isChanging: true,
+            customTime: timeNormalizer.toOffsetedTimestring(this.props.time, this.props.offset)
+        });
         this.props.onTimeChangingStarted();
     },
     handleOnBlur: function (e) {
@@ -20,7 +23,7 @@ module.exports = React.createClass({
         this.setState({isChanging: false});
         this.props.onTimeChangingFinished(newTime);
 
-        function buildDateWithTimezone(){
+        function buildDateWithTimezone() {
             var year = self.props.time.getFullYear();
             var month = self.pad(self.props.time.getMonth());
             var day = self.pad(self.props.time.getDate());
@@ -32,9 +35,8 @@ module.exports = React.createClass({
     },
     render: function () {
         var time = timeNormalizer.toOffsetedTimestring(this.props.time, this.props.offset);
-        if (this.state.isChanging) {
+        if (this.state.isChanging)
             time = this.state.customTime;
-        }
 
         return (
             <Paper className="user-timezone">
