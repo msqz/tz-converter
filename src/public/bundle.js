@@ -38592,11 +38592,7 @@
 	        _react2.default.createElement(
 	            _Card.CardText,
 	            null,
-	            _react2.default.createElement(
-	                'span',
-	                null,
-	                timeNormalizer.toOffsetedTimestring(time, offset || 0)
-	            )
+	            _react2.default.createElement('input', { type: 'time', value: timeNormalizer.toOffsetedTimestring(time, offset || 0), disabled: 'disabled' })
 	        )
 	    );
 	};

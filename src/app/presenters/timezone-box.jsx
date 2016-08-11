@@ -6,7 +6,7 @@ const TimezoneBox = ({label, time, offset}) => (
     <Card className="timezone-box">
         <CardTitle title={label}/>
         <CardText>
-            <span>{timeNormalizer.toOffsetedTimestring(time, offset || 0)}</span>
+            <input type="time" value={timeNormalizer.toOffsetedTimestring(time, offset || 0)} disabled="disabled"/>
         </CardText>
     </Card>
 );

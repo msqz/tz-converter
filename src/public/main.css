@@ -40,3 +40,9 @@ body {
     text-align: center;
     display: inline-block;
 }
+
+.timezone-box input[type=time] {
+    border: none;
+    font-size: 16px;
+    margin: -10px 0 0 35px;
+}
